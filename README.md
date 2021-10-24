@@ -2,6 +2,9 @@
 
 Send Messages, Photos, and Documents to Telegram using Telegram Bot API with [node-telegram-bot-api](https://github.com/yagop/node-telegram-bot-api) module.
 
+![unittest](https://github.com/andreyunugro/moleculer-telegram/actions/workflows/unittest.yml/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/andreyunugro/moleculer-telegram/badge.svg?branch=main)](https://coveralls.io/github/andreyunugro/moleculer-telegram?branch=main)
+
 # Install
 
 ```bash
