@@ -1,5 +1,5 @@
 {
-  "name": "moleculer-telegram",
+  "name": "moleculer-telegram-bot",
   "version": "1.0.0",
   "description": "Moleculer Framework Addons: Send Messages, Photos, and Documents to Telegram using Telegram Bot API",
   "main": "index.js",

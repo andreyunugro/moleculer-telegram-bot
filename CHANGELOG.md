@@ -7,4 +7,4 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Features
 
-* **service:** new telegram service to send message, photo, and document using telegram bot api ([af4220b](https://github.com/andreyunugro/moleculer-telegram/commit/af4220bdc7cab3b1dd9b6508188e3393b022552c))
+* **service:** new telegram service to send message, photo, and document using telegram bot api ([af4220b](https://github.com/andreyunugro/moleculer-telegram-bot/commit/af4220bdc7cab3b1dd9b6508188e3393b022552c))

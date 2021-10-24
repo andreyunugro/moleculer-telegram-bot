@@ -1,14 +1,14 @@
-# moleculer-telegram
+# moleculer-telegram-bot
 
 Send Messages, Photos, and Documents to Telegram using Telegram Bot API with [node-telegram-bot-api](https://github.com/yagop/node-telegram-bot-api) module.
 
-![unittest](https://github.com/andreyunugro/moleculer-telegram/actions/workflows/unittest.yml/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/github/andreyunugro/moleculer-telegram/badge.svg?branch=main)](https://coveralls.io/github/andreyunugro/moleculer-telegram?branch=main)
+![unittest](https://github.com/andreyunugro/moleculer-telegram-bot/actions/workflows/unittest.yml/badge.svg)
+[![Coverage Status](https://coveralls.io/repos/github/andreyunugro/moleculer-telegram-bot/badge.svg?branch=main)](https://coveralls.io/github/andreyunugro/moleculer-telegram-bot?branch=main)
 
 # Install
 
 ```bash
-$ npm install moleculer-telegram --save
+$ npm install moleculer-telegram-bot --save
 ```
 
 # Usage
@@ -17,7 +17,7 @@ $ npm install moleculer-telegram --save
 
 ```js
 const { ServiceBroker } = require('moleculer');
-const TelegramService = require('moleculer-telegram');
+const TelegramService = require('moleculer-telegram-bot');
 
 // Create broker
 const broker = new ServiceBroker({ logger: console });
