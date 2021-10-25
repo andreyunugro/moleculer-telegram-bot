@@ -56,7 +56,7 @@ declare module 'moleculer-telegram-bot' {
         methods: {
             sendMessage(to: string|number, message: string, opts: TelegramBot.SendMessageOptions): Promise<TelegramBot.Message>;
             sendPhoto(to: string|number, photo: string, opts: TelegramBot.SendPhotoOptions, fileOpts: telegramBotService["actions"]["sendPhoto"]["params"]["fileOpts"]): Promise<TelegramBot.Message>;
-            sendDocument(to: string|number, doc: string, opts: TelegramBot.SendPhotoOptions, fileOpts: telegramBotService["actions"]["sendPhoto"]["params"]["fileOpts"]): Promise<TelegramBot.Message>;
+            sendDocument(to: string|number, doc: string, opts: TelegramBot.SendPhotoOptions, fileOpts: telegramBotService["actions"]["sendDocument"]["params"]["fileOpts"]): Promise<TelegramBot.Message>;
         },
     };
 

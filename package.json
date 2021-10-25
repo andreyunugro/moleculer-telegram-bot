@@ -53,6 +53,7 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
+  "files": ["index.*", "src/*"],
   "engines": {
     "node": ">= 12.x.x"
   },
