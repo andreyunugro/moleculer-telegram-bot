@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.1](https://github.com/andreyunugro/moleculer-telegram/compare/v1.0.0...v1.0.1) (2021-10-25)
+
+
+### Bug Fixes
+
+* **index.d.ts:** fix module declaration ([eae02bd](https://github.com/andreyunugro/moleculer-telegram/commit/eae02bd6aa3cf8ad151ca4ec175aad82cb2bd1fe))
+
 ## 1.0.0 (2021-10-24)
 
 
