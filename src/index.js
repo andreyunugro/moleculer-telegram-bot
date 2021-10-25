@@ -4,6 +4,22 @@ const TelegramBot = require('node-telegram-bot-api');
 require('dotenv').config();
 
 module.exports = function createService() {
+  const sendOptions = {
+    parse_mode: { type: 'string', optional: true, enum: ['Markdown', 'MarkdownV2', 'HTML'] },
+    caption: { type: 'string', optional: true },
+    disable_notification: { type: 'boolean', optional: true },
+    reply_to_message_id: { type: 'number', optional: true },
+    reply_markup: { type: 'any', optional: true },
+    fileOpts: {
+      type: 'object',
+      optional: true,
+      strict: 'remove',
+      props: {
+        filename: { type: 'string', optional: true },
+        contentType: { type: 'string', optional: true },
+      },
+    },
+  };
   const service = {
     name: 'telegram',
 
@@ -22,9 +38,9 @@ module.exports = function createService() {
           reply_to_message_id: { type: 'number', optional: true },
           reply_markup: { type: 'any', optional: true },
         },
-        handler(ctx) {
+        handler({ params }) {
           // Build the send message opts.
-          const { to, message, ...opts } = ctx.params;
+          const { to, message, ...opts } = params;
           return this.sendMessage(to, message, opts);
         },
       },
@@ -33,26 +49,13 @@ module.exports = function createService() {
         params: {
           to: [{ type: 'string' }, { type: 'number' }],
           photo: 'string',
-          parse_mode: { type: 'string', optional: true, enum: ['Markdown', 'MarkdownV2', 'HTML'] },
-          caption: { type: 'string', optional: true },
-          disable_notification: { type: 'boolean', optional: true },
-          reply_to_message_id: { type: 'number', optional: true },
-          reply_markup: { type: 'any', optional: true },
-          fileOpts: {
-            type: 'object',
-            optional: true,
-            strict: 'remove',
-            props: {
-              filename: { type: 'string', optional: true },
-              contentType: { type: 'string', optional: true },
-            },
-          },
+          ...sendOptions,
         },
-        handler(ctx) {
-          // Currently only support send photo as string.
+        handler({ params }) {
+          // Currently only support send photo as string URL.
           const {
             to, photo, fileOpts, ...opts
-          } = ctx.params;
+          } = params;
           return this.sendPhoto(to, photo, opts, fileOpts);
         },
       },
@@ -61,26 +64,13 @@ module.exports = function createService() {
         params: {
           to: [{ type: 'string' }, { type: 'number' }],
           doc: 'string',
-          parse_mode: { type: 'string', optional: true, enum: ['Markdown', 'MarkdownV2', 'HTML'] },
-          caption: { type: 'string', optional: true },
-          disable_notification: { type: 'boolean', optional: true },
-          reply_to_message_id: { type: 'number', optional: true },
-          reply_markup: { type: 'any', optional: true },
-          fileOpts: {
-            type: 'object',
-            optional: true,
-            strict: 'remove',
-            props: {
-              filename: { type: 'string', optional: true },
-              contentType: { type: 'string', optional: true },
-            },
-          },
+          ...sendOptions,
         },
-        handler(ctx) {
-          // Currently only support send document as document.
+        handler({ params }) {
+          // Currently only support send document as string URL.
           const {
             to, doc, fileOpts, ...opts
-          } = ctx.params;
+          } = params;
           return this.sendDocument(to, doc, opts, fileOpts);
         },
       },

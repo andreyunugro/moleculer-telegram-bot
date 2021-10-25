@@ -27,6 +27,6 @@ broker.start().then(() => {
       to: '',
       message: 'Hello Telegram!',
     })
-    .then((res) => console.log('Res:', res))
-    .catch(console.error);
+    .then((res) => broker.logger.info('Res:', res))
+    .catch(broker.logger.error);
 });

@@ -4,14 +4,15 @@ Send Messages, Photos, and Documents to Telegram using Telegram Bot API with [no
 
 ![unittest](https://github.com/andreyunugro/moleculer-telegram-bot/actions/workflows/unittest.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/andreyunugro/moleculer-telegram-bot/badge.svg?branch=main)](https://coveralls.io/github/andreyunugro/moleculer-telegram-bot?branch=main)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/c56bf6791fa1453c931c33f2badae8ef)](https://www.codacy.com/gh/andreyunugro/moleculer-telegram-bot/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=andreyunugro/moleculer-telegram-bot&amp;utm_campaign=Badge_Grade)
 
-# Install
+## Install
 
-```bash
-$ npm install moleculer-telegram-bot --save
+```sh
+npm install moleculer-telegram-bot --save
 ```
 
-# Usage
+## Usage
 
 > Before use please set the `TELEGRAM_TOKEN` environment variables.
 
@@ -37,7 +38,7 @@ broker.start().then(() => {
 });
 ```
 
-# Settings
+## Settings
 
 <!-- AUTO-CONTENT-START:SETTINGS -->
 | Property | Type | Default | Description |
@@ -58,13 +59,14 @@ broker.start().then(() => {
 
 -->
 
-# Actions
+## Actions
+
 <!-- AUTO-CONTENT-START:ACTIONS -->
-## `sendMessage` 
+### `sendMessage` 
 
 Send a Telegram Message
 
-### Parameters
+#### Parameters
 | Property | Type | Default | Description |
 | -------- | ---- | ------- | ----------- |
 | `to` | `String` \| `Number` | **required** | Message target |
@@ -75,11 +77,11 @@ Send a Telegram Message
 | `reply_to_message_id` | `Number` | - | Optional reply to message id |
 | `reply_markup` | `Any` | - | Optional reply markup |
 
-## `sendPhoto` 
+### `sendPhoto` 
 
 Send a Telegram Photo using URL.
 
-### Parameters
+#### Parameters
 | Property | Type | Default | Description |
 | -------- | ---- | ------- | ----------- |
 | `to` | `String` \| `Number` | **required** | Send photo target |
@@ -92,11 +94,11 @@ Send a Telegram Photo using URL.
 | `fileOpts.filename` | `String` | - | Optional filename |
 | `fileOpts.contentType` | `String` | - | Optional file content type |
 
-## `sendDocument` 
+### `sendDocument` 
 
 Send a Telegram Document using URL.
 
-### Parameters
+#### Parameters
 | Property | Type | Default | Description |
 | -------- | ---- | ------- | ----------- |
 | `to` | `String` \| `Number` | **required** | Send document target |
@@ -109,19 +111,18 @@ Send a Telegram Document using URL.
 | `fileOpts.filename` | `String` | - | Optional filename |
 | `fileOpts.contentType` | `String` | - | Optional file content type |
 
-
 <!-- AUTO-CONTENT-END:ACTIONS -->
 
 <!-- AUTO-CONTENT-TEMPLATE:ACTIONS
 {{#each this}}
-## `{{name}}` {{#each badges}}{{this}} {{/each}}
+### `{{name}}` {{#each badges}}{{this}} {{/each}}
 {{#since}}
 _<sup>Since: {{this}}</sup>_
 {{/since}}
 
 {{description}}
 
-### Parameters
+#### Parameters
 | Property | Type | Default | Description |
 | -------- | ---- | ------- | ----------- |
 {{#each params}}
@@ -134,25 +135,25 @@ _<sup>Since: {{this}}</sup>_
 {{/each}}
 -->
 
-# Methods
+## Methods
 
 <!-- AUTO-CONTENT-START:METHODS -->
-## `sendMessage` 
+### `sendMessage` 
 
 Send a message
 
-### Parameters
+#### Parameters
 | Property | Type | Default | Description |
 | -------- | ---- | ------- | ----------- |
 | `to` | `String` \| `Number` | - | Message target |
 | `message` | `String` | - | Body of the message |
 | `opts` | `TelegramBot.SendMessageOptions` | - | Send message options |
 
-## `sendPhoto` 
+### `sendPhoto` 
 
 Send a photo
 
-### Parameters
+#### Parameters
 | Property | Type | Default | Description |
 | -------- | ---- | ------- | ----------- |
 | `to` | `String` \| `Number` | - | Message target |
@@ -160,11 +161,11 @@ Send a photo
 | `opts` | `TelegramBot.SendPhotoOptions` | - | Send photo options |
 | `fileOpts` | `TelegramBot.fileOpts` | - | Send photo file options |
 
-## `sendDocument` 
+### `sendDocument` 
 
 Send a document
 
-### Parameters
+#### Parameters
 | Property | Type | Default | Description |
 | -------- | ---- | ------- | ----------- |
 | `to` | `String` \| `Number` | - | Message target |
@@ -176,14 +177,14 @@ Send a document
 
 <!-- AUTO-CONTENT-TEMPLATE:METHODS
 {{#each this}}
-## `{{name}}` {{#each badges}}{{this}} {{/each}}
+### `{{name}}` {{#each badges}}{{this}} {{/each}}
 {{#since}}
 _<sup>Since: {{this}}</sup>_
 {{/since}}
 
 {{description}}
 
-### Parameters
+#### Parameters
 | Property | Type | Default | Description |
 | -------- | ---- | ------- | ----------- |
 {{#each params}}
@@ -196,16 +197,16 @@ _<sup>Since: {{this}}</sup>_
 {{/each}}
 -->
 
-# Test
-```
-$ npm test
+## Test
+```sh
+npm test
 ```
 
 In development with watching
 
-```
-$ npm run ci
+```sh
+npm run ci
 ```
 
-# License
+## License
 The project is available under the [MIT license](https://tldrlegal.com/license/mit-license).
