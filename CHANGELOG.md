@@ -2,7 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-## Versions
+## [1.1.0](https://github.com/andreyunugro/moleculer-telegram/compare/v1.0.2...v1.1.0) (2021-10-26)
+
+
+### Features
+
+* **index:** implement default target using env and service options ([82e3af0](https://github.com/andreyunugro/moleculer-telegram/commit/82e3af0b1ced7c2cf1990f9850367afe57a4299e))
 
 ### [1.0.2](https://github.com/andreyunugro/moleculer-telegram/compare/v1.0.1...v1.0.2) (2021-10-25)
 
