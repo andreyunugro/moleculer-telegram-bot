@@ -1,14 +1,32 @@
 import { Stream } from 'stream';
-import { ActionHandler } from 'moleculer';
+import { ActionHandler, ActionParams } from 'moleculer';
 import TelegramBot from 'node-telegram-bot-api';
 
 declare module 'moleculer-telegram-bot' {   
-    type telegramFileOptions = {
+    interface telegramFileOptions {
         fileOpts?: {
             filename?: string;
             contentType?: string;
         };
-    };
+    }
+
+    interface sendMessageParams extends TelegramBot.SendMessageOptions, ActionParams {
+        to: string | 'number';
+        message: string;
+        reply_to_message_id?: any;
+    }
+
+    interface sendPhotoParams extends TelegramBot.SendPhotoOptions, telegramFileOptions, ActionParams {
+        to: string | 'number';
+        photo: string;
+        reply_to_message_id?: any;
+    }
+
+    interface sendDocumentParams extends TelegramBot.SendDocumentOptions, telegramFileOptions, ActionParams {
+        to: string | 'number';
+        doc: string;
+        reply_to_message_id?: any;
+    }
 
     type telegramBotService = {
         name: string;
@@ -18,26 +36,17 @@ declare module 'moleculer-telegram-bot' {
         },
         actions: {
             sendMessage: {
-                params: {
-                    to: string | "number";
-                    message: string;
-                } & TelegramBot.SendMessageOptions;
+                params: sendMessageParams;
                 handler: ActionHandler;
             };
     
             sendPhoto: {
-                params: {
-                    to: string | "number";
-                    photo: string;
-                } & TelegramBot.SendPhotoOptions & telegramFileOptions;
+                params: sendPhotoParams;
                 handler: ActionHandler;
             };
     
             sendDocument: {
-                params: {
-                    to: string | "number";
-                    doc: string;
-                } & TelegramBot.SendDocumentOptions & telegramFileOptions;
+                params: sendDocumentParams
                 handler: ActionHandler;
             };
         },
