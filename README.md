@@ -4,6 +4,7 @@ Send Messages, Photos, and Documents to Telegram using Telegram Bot API with [no
 
 ![unittest](https://github.com/andreyunugro/moleculer-telegram-bot/actions/workflows/unittest.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/andreyunugro/moleculer-telegram-bot/badge.svg?branch=main)](https://coveralls.io/github/andreyunugro/moleculer-telegram-bot?branch=main)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/c56bf6791fa1453c931c33f2badae8ef)](https://www.codacy.com/gh/andreyunugro/moleculer-telegram-bot/dashboard?utm_source=github.com&utm_medium=referral&utm_content=andreyunugro/moleculer-telegram-bot&utm_campaign=Badge_Coverage)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/c56bf6791fa1453c931c33f2badae8ef)](https://www.codacy.com/gh/andreyunugro/moleculer-telegram-bot/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=andreyunugro/moleculer-telegram-bot&amp;utm_campaign=Badge_Grade)
 
 ## Install

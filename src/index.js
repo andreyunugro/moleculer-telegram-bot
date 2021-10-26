@@ -37,11 +37,7 @@ module.exports = function createService(serviceOpts = {}) {
     actions: {
       sendMessage: {
         params: {
-          to: {
-            type: 'multi',
-            rules: [{ type: 'string' }, { type: 'number' }],
-            default: () => (service.settings.telegramTarget),
-          },
+          to: {},
           message: 'string',
           parse_mode: { type: 'string', optional: true, enum: ['Markdown', 'MarkdownV2', 'HTML'] },
           disable_web_page_preview: { type: 'boolean', optional: true },
@@ -62,11 +58,7 @@ module.exports = function createService(serviceOpts = {}) {
 
       sendPhoto: {
         params: {
-          to: {
-            type: 'multi',
-            rules: [{ type: 'string' }, { type: 'number' }],
-            default: () => (service.settings.telegramTarget),
-          },
+          to: {},
           photo: 'string',
           ...sendOptions,
         },
@@ -81,11 +73,7 @@ module.exports = function createService(serviceOpts = {}) {
 
       sendDocument: {
         params: {
-          to: {
-            type: 'multi',
-            rules: [{ type: 'string' }, { type: 'number' }],
-            default: () => (service.settings.telegramTarget),
-          },
+          to: {},
           doc: 'string',
           ...sendOptions,
         },
@@ -176,5 +164,16 @@ module.exports = function createService(serviceOpts = {}) {
       return this.Promise.resolve();
     },
   };
+
+  // Define service actions params here to avoid duplication.
+  const paramsTo = {
+    type: 'multi',
+    rules: [{ type: 'string' }, { type: 'number' }],
+    default: () => (service.settings.telegramTarget),
+  };
+  service.actions.sendMessage.params.to = paramsTo;
+  service.actions.sendPhoto.params.to = paramsTo;
+  service.actions.sendDocument.params.to = paramsTo;
+
   return service;
 };
