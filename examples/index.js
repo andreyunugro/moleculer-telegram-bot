@@ -13,8 +13,11 @@ require('dotenv').config();
 broker.createService({
   name: 'telegram',
   mixins: [TelegramService()],
+  // Alternative:
+  // mixins: [TelegramService({ token: '', target: '' })],
   settings: {
     telegramToken: process.env.TELEGRAM_TOKEN,
+    telegramTarget: process.env.TELEGRAM_TARGET,
   },
 });
 
@@ -23,8 +26,6 @@ broker.start().then(() => {
   // Call action
   broker
     .call('telegram.sendMessage', {
-      // Change this to:
-      to: '',
       message: 'Hello Telegram!',
     })
     .then((res) => broker.logger.info('Res:', res))

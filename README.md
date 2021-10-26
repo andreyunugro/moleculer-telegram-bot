@@ -14,7 +14,7 @@ npm install moleculer-telegram-bot --save
 
 ## Usage
 
-> Before use please set the `TELEGRAM_TOKEN` environment variables.
+> Before use the example below, please set the `TELEGRAM_TOKEN` environment variables and optional `TELEGRAM_TARGET` for default target.
 
 ```js
 const { ServiceBroker } = require('moleculer');
@@ -32,7 +32,7 @@ broker.createService({
 // Start server
 broker.start().then(() => {
   broker
-    .call('telegram.sendMessage', { to: '', message: 'Hello Telegram!' })
+    .call('telegram.sendMessage', { message: 'Hello Telegram!' })
     .then(res => console.log('Telegram message sent.'))
     .catch(console.error);
 });
@@ -44,6 +44,7 @@ broker.start().then(() => {
 | Property | Type | Default | Description |
 | -------- | ---- | ------- | ----------- |
 | `telegramToken` | `String` | **required** | Telegram Bot API Token. Visit [How do I create a bot?](https://core.telegram.org/bots#3-how-do-i-create-a-bot). |
+| `telegramTarget` | `String` \| `Number` | - | Telegram chat id as default target |
 
 <!-- AUTO-CONTENT-END:SETTINGS -->
 
@@ -69,8 +70,8 @@ Send a Telegram Message
 #### Parameters
 | Property | Type | Default | Description |
 | -------- | ---- | ------- | ----------- |
-| `to` | `String` \| `Number` | **required** | Message target |
 | `message` | `String` | **required** | Message text |
+| `to` | `String` \| `Number` | - | Message target (required if default target not set) |
 | `parse_mode` | `String` | - | Optional parse mode |
 | `disable_web_page_preview` | `Boolean` | - | Optional disable web page preview |
 | `disable_notification` | `Boolean` | - | Optional disable notification |
@@ -84,8 +85,8 @@ Send a Telegram Photo using URL.
 #### Parameters
 | Property | Type | Default | Description |
 | -------- | ---- | ------- | ----------- |
-| `to` | `String` \| `Number` | **required** | Send photo target |
 | `photo` | `String` | **required** | Photo URL |
+| `to` | `String` \| `Number` | - | Photo target (required if default target not set) |
 | `parse_mode` | `String` | - | Optional parse mode |
 | `caption` | `String` | - | Optional photo caption |
 | `disable_notification` | `Boolean` | - | Optional disable notification |
@@ -101,8 +102,8 @@ Send a Telegram Document using URL.
 #### Parameters
 | Property | Type | Default | Description |
 | -------- | ---- | ------- | ----------- |
-| `to` | `String` \| `Number` | **required** | Send document target |
 | `doc` | `String` | **required** | Document URL |
+| `to` | `String` \| `Number` | - | Document target (required if default target not set) |
 | `parse_mode` | `String` | - | Optional parse mode |
 | `caption` | `String` | - | Optional document caption |
 | `disable_notification` | `Boolean` | - | Optional disable notification |

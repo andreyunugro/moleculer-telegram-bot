@@ -1,64 +1,57 @@
+import { Stream } from 'stream';
 import { ActionHandler } from 'moleculer';
 import TelegramBot from 'node-telegram-bot-api';
 
-declare module 'moleculer-telegram-bot' {
+declare module 'moleculer-telegram-bot' {   
+    type telegramFileOptions = {
+        fileOpts?: {
+            filename?: string;
+            contentType?: string;
+        };
+    };
+
     type telegramBotService = {
         name: string;
-        settings: { telegramToken: string },
+        settings: { 
+            telegramToken: string;
+            telegramTarget: string;
+        },
         actions: {
             sendMessage: {
                 params: {
-                    to: string|"number";
+                    to: string | "number";
                     message: string;
-                    parse_mode?: TelegramBot.ParseMode;
-                    disable_web_page_preview?: boolean;
-                    disable_notification?: boolean;
-                    reply_to_message_id?: "number";
-                    reply_markup?: any;
-                };
+                } & TelegramBot.SendMessageOptions;
                 handler: ActionHandler;
             };
     
             sendPhoto: {
                 params: {
-                    to: string|"number";
+                    to: string | "number";
                     photo: string;
-                    parse_mode?: TelegramBot.ParseMode;
-                    caption?: string;
-                    disable_notification?: boolean;
-                    reply_to_message_id?: "number";
-                    reply_markup?: any;
-                    fileOpts?: {
-                        filename?: string;
-                        contentType?: string;
-                    };
-                };
+                } & TelegramBot.SendPhotoOptions & telegramFileOptions;
                 handler: ActionHandler;
             };
     
             sendDocument: {
                 params: {
-                    to: string|"number";
+                    to: string | "number";
                     doc: string;
-                    parse_mode?: TelegramBot.ParseMode;
-                    caption?: string;
-                    disable_notification?: boolean;
-                    reply_to_message_id?: "number";
-                    reply_markup?: any;
-                    fileOpts?: {
-                        filename?: string;
-                        contentType?: string;
-                    };
-                };
+                } & TelegramBot.SendDocumentOptions & telegramFileOptions;
                 handler: ActionHandler;
             };
         },
         methods: {
-            sendMessage(to: string|number, message: string, opts: TelegramBot.SendMessageOptions): Promise<TelegramBot.Message>;
-            sendPhoto(to: string|number, photo: string, opts: TelegramBot.SendPhotoOptions, fileOpts: telegramBotService["actions"]["sendPhoto"]["params"]["fileOpts"]): Promise<TelegramBot.Message>;
-            sendDocument(to: string|number, doc: string, opts: TelegramBot.SendPhotoOptions, fileOpts: telegramBotService["actions"]["sendDocument"]["params"]["fileOpts"]): Promise<TelegramBot.Message>;
+            sendMessage(to: string | number, message: string, opts: TelegramBot.SendMessageOptions): Promise<TelegramBot.Message>;
+            sendPhoto(to: string | number, photo: string | Stream | Buffer, opts: TelegramBot.SendPhotoOptions, fileOpts: telegramFileOptions): Promise<TelegramBot.Message>;
+            sendDocument(to: string | number, doc: string | Stream | Buffer, opts: TelegramBot.SendDocumentOptions, fileOpts: telegramFileOptions): Promise<TelegramBot.Message>;
         },
     };
 
-    export default function(): telegramBotService;
+    type serviceOptions = {
+        target?: string;
+        token?: string;
+    };
+
+    export default function(serviceOpts?: serviceOptions): telegramBotService;
 }

@@ -3,7 +3,11 @@ const TelegramBot = require('node-telegram-bot-api');
 
 require('dotenv').config();
 
-module.exports = function createService() {
+module.exports = function createService(serviceOpts = {}) {
+  // Get telegram service options.
+  const { target, token } = serviceOpts;
+
+  // Define telegram send options, in order to minimize duplication block.
   const sendOptions = {
     parse_mode: { type: 'string', optional: true, enum: ['Markdown', 'MarkdownV2', 'HTML'] },
     caption: { type: 'string', optional: true },
@@ -20,17 +24,24 @@ module.exports = function createService() {
       },
     },
   };
+
+  // Define telegram service.
   const service = {
     name: 'telegram',
 
     settings: {
-      telegramToken: process.env.TELEGRAM_TOKEN,
+      telegramToken: process.env.TELEGRAM_TOKEN || token,
+      telegramTarget: process.env.TELEGRAM_TARGET || target,
     },
 
     actions: {
       sendMessage: {
         params: {
-          to: [{ type: 'string' }, { type: 'number' }],
+          to: {
+            type: 'multi',
+            rules: [{ type: 'string' }, { type: 'number' }],
+            default: () => (service.settings.telegramTarget),
+          },
           message: 'string',
           parse_mode: { type: 'string', optional: true, enum: ['Markdown', 'MarkdownV2', 'HTML'] },
           disable_web_page_preview: { type: 'boolean', optional: true },
@@ -39,6 +50,10 @@ module.exports = function createService() {
           reply_markup: { type: 'any', optional: true },
         },
         handler({ params }) {
+          // Send to priorities:
+          // 1. to (direct input),
+          // 2. target (service options),
+          // 3. process.env.TELEGRAM_TARGET / this.settings.telegramTarget.
           // Build the send message opts.
           const { to, message, ...opts } = params;
           return this.sendMessage(to, message, opts);
@@ -47,7 +62,11 @@ module.exports = function createService() {
 
       sendPhoto: {
         params: {
-          to: [{ type: 'string' }, { type: 'number' }],
+          to: {
+            type: 'multi',
+            rules: [{ type: 'string' }, { type: 'number' }],
+            default: () => (service.settings.telegramTarget),
+          },
           photo: 'string',
           ...sendOptions,
         },
@@ -62,7 +81,11 @@ module.exports = function createService() {
 
       sendDocument: {
         params: {
-          to: [{ type: 'string' }, { type: 'number' }],
+          to: {
+            type: 'multi',
+            rules: [{ type: 'string' }, { type: 'number' }],
+            default: () => (service.settings.telegramTarget),
+          },
           doc: 'string',
           ...sendOptions,
         },
@@ -92,7 +115,7 @@ module.exports = function createService() {
           return result;
         } catch (err) {
           // https://github.com/yagop/node-telegram-bot-api/blob/master/doc/usage.md#error-handling
-          const error = new MoleculerError(`${err.message}`, 500, 'SENDMESSAGE_ERROR', err.response.body);
+          const error = new MoleculerError(err.message, 500, 'SENDMESSAGE_ERROR', err.response.body);
           return this.Promise.reject(error);
         }
       },
@@ -112,7 +135,7 @@ module.exports = function createService() {
           this.logger.debug(`The photo send to "${to}" successfully.`);
           return result;
         } catch (err) {
-          const error = new MoleculerError(`${err.message}`, 500, 'SENDPHOTO_ERROR', err.response.body);
+          const error = new MoleculerError(err.message, 500, 'SENDPHOTO_ERROR', err.response.body);
           return this.Promise.reject(error);
         }
       },
@@ -132,7 +155,7 @@ module.exports = function createService() {
           this.logger.debug(`The document send to "${to}" successfully.`);
           return result;
         } catch (err) {
-          const error = new MoleculerError(`${err.message}`, 500, 'SENDDOCUMENT_ERROR', err.response.body);
+          const error = new MoleculerError(err.message, 500, 'SENDDOCUMENT_ERROR', err.response.body);
           return this.Promise.reject(error);
         }
       },
